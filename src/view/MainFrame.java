@@ -1,16 +1,18 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Component;
 import view.models.FoodTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.Food;
+import model.enums.FoodColourEnum;
+import model.enums.FoodTagEnum;
 
 /**
  *
@@ -31,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
         TableRowSorter<TableModel> sorter =new TableRowSorter<TableModel>(model);
         foodTable.setRowSorter(sorter);
         setLocationRelativeTo(null);
+        renderTable();
     }
 
     /**
@@ -299,5 +302,29 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void renderTable() {
+        foodTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {           
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+                FoodColourEnum colour = (FoodColourEnum) model.getValueAt(row, 4);
+                String colStr = colour.getDisplayedColourName();
+                switch(colStr) {
+                    case "Green":
+                        setBackground(Color.green);
+                        break;
+                    case "Red":
+                        setBackground(Color.red);
+                        break;
+                    case "Yellow":
+                        setBackground(Color.yellow);
+                        break;
+                }
+                return this;
+            }
+        });
+        foodTable.setDefaultRenderer(Number.class, foodTable.getDefaultRenderer(Object.class));
+    }
     
 }

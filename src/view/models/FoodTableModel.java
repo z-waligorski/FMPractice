@@ -50,6 +50,9 @@ public class FoodTableModel extends AbstractTableModel {
             case 3:
                 value = food.getTags();
                 break;
+            case 4:
+                value = food.getColour();
+                break;
             default:
                 return null;
         }  
