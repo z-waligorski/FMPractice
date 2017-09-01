@@ -28,6 +28,7 @@ public class FoodManagerPractice {
         }
         DataModel dataModel = new DataModel();
         MainFrame mainFrame = new MainFrame(dataModel.getDataForMainFrameTable(), dataModel.getColumnsNames());
+        //Variable application controller is not necessary, this should be handled differently.
         ApplicationController applicationController = new ApplicationController(dataModel, mainFrame);
         mainFrame.setVisible(true);
     }   
