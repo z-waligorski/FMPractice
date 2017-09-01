@@ -304,26 +304,27 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void renderTable() {
-        foodTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {           
+        foodTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() { 
+            //Could be also done with prepareRenderer
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
                 FoodColourEnum colour = (FoodColourEnum) model.getValueAt(row, 4);
-                String colStr = colour.getDisplayedColourName();
-                switch(colStr) {
-                    case "Green":
+                switch(colour) {
+                    case GREEN:
                         setBackground(Color.green);
                         break;
-                    case "Red":
+                    case RED:
                         setBackground(Color.red);
                         break;
-                    case "Yellow":
+                    case YELLOW:
                         setBackground(Color.yellow);
                         break;
                 }
                 return this;
             }
         });
+        //Numbers have diffrent type of rendering!
         foodTable.setDefaultRenderer(Number.class, foodTable.getDefaultRenderer(Object.class));
     }
     
